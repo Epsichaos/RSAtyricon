@@ -34,8 +34,8 @@ int keyGeneration() {
     mpz_init2(pgcdEPhi, 2048);
     mpz_init2(d, 2048);
 
-    FILE* privateFile=fopen("prive.rsa","w+");
-	FILE* publicFile=fopen("public.rsa","w+");
+    FILE* privateFile=fopen("prive.rsa","w");
+	FILE* publicFile=fopen("public.rsa","w");
     if(privateFile == NULL||publicFile == NULL) {
         printf("Error in opening private or public file ! \n");
         return -1;

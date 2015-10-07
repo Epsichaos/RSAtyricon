@@ -3,4 +3,152 @@
 #include <stdlib.h>
 #include <gmp.h>
 #include <time.h>
-#include <unistd.h>
+
+int cipherRSA() {
+    FILE* publicFile = fopen("public.rsa", "r");
+    FILE* clearFile = fopen("Clair.txt", "r");
+    FILE* cipheredFile = fopen("cipherFile.txt", "w");
+    if(publicFile == NULL||clearFile == NULL||cipheredFile == NULL) {
+        printf("Error while opening one of the 3 files required in cipherRSA\n");
+        return -1;
+    }
+
+    // numbers of public key for encryption
+    mpz_t n;
+    mpz_t e;
+    mpz_t m;
+    mpz_t c;
+
+    // buffer and caracters for the ciphering
+    char buffer[128];
+    int i = 0;
+    char caract;
+
+    // initialisation
+    mpz_init2(n, 2048);
+    mpz_init2(e, 2048);
+    mpz_init2(m, 2048);
+    mpz_init2(c, 2048);
+
+    // allocation : we import n and e from the file where the public key is stored (i.e. public.rsa)
+    mpz_inp_str(n,publicFile,10);
+	mpz_inp_str(e,publicFile,10);
+
+    gmp_printf("We found n = %Zd \n", n);
+    gmp_printf("We found e = %Zd \n", e);
+
+    do {
+        caract = fgetc(clearFile);
+        if(caract != '\0' && caract != '\n') {
+            buffer[i%128] = caract;
+            if(i%128 == 126) {
+                buffer[127]='\0';
+                mpz_set_str(m, buffer, 62);
+                mpz_powm(c,m,e,n);
+                mpz_out_str(cipheredFile, 62,c);
+                fputc('\n', cipheredFile);
+            }
+        }
+        else {
+            if(i%127 != 0) {
+                buffer[i%128] = '\0';
+            }
+            mpz_set_str(m, buffer, 62);
+            mpz_powm(c,m,e,n);
+            mpz_out_str(cipheredFile, 62,c);
+            fputc('\n', cipheredFile);
+            printf("END OF ENCRYPTION !\n");
+        }
+        i++;
+    }while(caract != '\0' && caract != '\n');
+
+    // clear memory
+    mpz_clear(n);
+    mpz_clear(e);
+    mpz_clear(m);
+    mpz_clear(c);
+
+    // close files
+    fclose(publicFile);
+    fclose(clearFile);
+    fclose(cipheredFile);
+
+    return 0;
+}
+
+int decipherRSA() {
+    printf("Begin of deciphering\n");
+    FILE* privateFile = fopen("prive.rsa", "r");
+    FILE* cipheredFile = fopen("cipherFile.txt", "r");
+    FILE* decipheredFile = fopen("decipheredFile.txt", "w");
+    if(privateFile == NULL||cipheredFile == NULL||decipheredFile == NULL) {
+        printf("Error while opening one of the 3 files required in decipherRSA\n");
+        return -1;
+    }
+
+    // numbers of private key for decryption
+    mpz_t n;
+    mpz_t p;
+    mpz_t q;
+    mpz_t d;
+    mpz_t c;
+    mpz_t m;
+
+    int i = 0;
+    int j = 1;
+    char buffer[500];
+    char caract;
+
+    // initialisation
+    mpz_init2(n, 2048);
+    mpz_init2(p, 2048);
+    mpz_init2(q, 2048);
+    mpz_init2(d, 2048);
+    mpz_init2(c, 2048);
+    mpz_init2(m, 2048);
+
+    // allocation : we import p, q and d from the file where the private key is stored (i.e. prive.rsa)
+    mpz_inp_str(p,privateFile,10);
+	mpz_inp_str(q,privateFile,10);
+    mpz_inp_str(d,privateFile,10);
+
+    mpz_mul(n, p, q);
+
+    gmp_printf("We found p = %Zd \n", p);
+    gmp_printf("We found q = %Zd \n", q);
+    gmp_printf("We found d = %Zd \n", d);
+
+    do {
+        caract = fgetc(cipheredFile);
+        if(caract != '\n') {
+            buffer[i] = caract;
+            i++;
+        }
+        else {
+            printf("Decryption de %s\n", buffer);
+            printf("j = %d\n", j);
+            buffer[i]='\0';
+            mpz_set_str(c, buffer, 62);
+            mpz_powm(m,c,d,n);
+            mpz_out_str(decipheredFile, 62, m);
+            i = 0;
+            j++;
+        }
+    } while(caract != EOF);
+
+    printf("Message deciphered !\n");
+
+    // clear memory
+    mpz_clear(p);
+    mpz_clear(q);
+    mpz_clear(d);
+    mpz_clear(c);
+    mpz_clear(m);
+
+    // close files
+    fclose(privateFile);
+    fclose(cipheredFile);
+    fclose(decipheredFile);
+
+    return 0;
+}

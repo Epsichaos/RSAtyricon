@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include "key.h"
 #include "miller.h"
+#include "rsa_core.h"
 
 
 int main(int argc, char* argv[]) {
@@ -18,8 +19,10 @@ int main(int argc, char* argv[]) {
     printf("|                     RSA IMPLEMENTATION                     |\n");
     printf("--------------------------------------------------------------\n");
 
-    keyGeneration();
+    //keyGeneration();
+    cipherRSA();
 
+    decipherRSA();
     // temps
     tend=time(NULL);
     texec=difftime(tend,tbegin);
