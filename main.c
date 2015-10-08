@@ -19,10 +19,25 @@ int main(int argc, char* argv[]) {
     printf("|                     RSA IMPLEMENTATION                     |\n");
     printf("--------------------------------------------------------------\n");
 
-    keyGeneration();
-    cipherRSA();
+    int i = 2;
+    int result;
+    mpz_t entier;
+    mpz_init(entier);
+    while(i<100) {
+        mpz_set_ui(entier, i);
+        result = millerRabin(entier);
+        if(result == 1) {
+            printf("i = %d est premier", i);
+        }
+        else {
+            printf("i = %d est non premier", i);
+        }
+    }
 
-    decipherRSA();
+//    keyGeneration();
+//    cipherRSA();
+
+//    decipherRSA();
     // temps
     tend=time(NULL);
     texec=difftime(tend,tbegin);
