@@ -86,11 +86,11 @@ void primeKeyGeneration(mpz_t p) {
     gmp_randstate_t state;
     gmp_randinit_default(state);
     gmp_randseed_ui(state,time(NULL));
-    
+
     int isPrime = NOT_PRIME;
     while(isPrime == NOT_PRIME) {
         mpz_set_ui(p,0);
-        mpz_urandomb(p,state,1024);
+        mpz_urandomb(p,state,1024);/*
         if(mpz_even_p(p)) {
             isPrime = NOT_PRIME;
         }
@@ -106,6 +106,8 @@ void primeKeyGeneration(mpz_t p) {
         else {
             isPrime = millerRabin(p);
         }
+        */
+        isPrime = millerRabin(p);
     }
     printf("Prime found, leaving the prime generation function...\n");
 }

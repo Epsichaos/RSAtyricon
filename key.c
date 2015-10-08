@@ -69,16 +69,16 @@ int keyGeneration() {
     mpz_invert(d,e,phi);
 
     // write on the private file
-    mpz_out_str(privateFile,10,p);
+    mpz_out_str(privateFile,16,p);
     fputs("\n",privateFile);
-    mpz_out_str(privateFile,10,q);
+    mpz_out_str(privateFile,16,q);
     fputs("\n",privateFile);
-    mpz_out_str(privateFile,10,d);
+    mpz_out_str(privateFile,16,d);
 
     // write on the public file
-    mpz_out_str(publicFile,10,n);
+    mpz_out_str(publicFile,16,n);
     fputs("\n",publicFile);
-    mpz_out_str(publicFile,10,e);
+    mpz_out_str(publicFile,16,e);
 
     // clear the memory
     mpz_clear(p);

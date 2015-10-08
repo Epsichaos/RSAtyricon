@@ -31,8 +31,8 @@ int cipherRSA() {
     mpz_init2(c, 2048);
 
     // allocation : we import n and e from the file where the public key is stored (i.e. public.rsa)
-    mpz_inp_str(n,publicFile,10);
-	mpz_inp_str(e,publicFile,10);
+    mpz_inp_str(n,publicFile,16);
+	mpz_inp_str(e,publicFile,16);
 
     gmp_printf("We found n = %Zd \n", n);
     gmp_printf("We found e = %Zd \n", e);
@@ -108,9 +108,9 @@ int decipherRSA() {
     mpz_init2(m, 2048);
 
     // allocation : we import p, q and d from the file where the private key is stored (i.e. prive.rsa)
-    mpz_inp_str(p,privateFile,10);
-	mpz_inp_str(q,privateFile,10);
-    mpz_inp_str(d,privateFile,10);
+    mpz_inp_str(p,privateFile,16);
+	mpz_inp_str(q,privateFile,16);
+    mpz_inp_str(d,privateFile,16);
 
     mpz_mul(n, p, q);
 
