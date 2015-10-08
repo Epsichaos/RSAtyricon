@@ -82,7 +82,6 @@ int millerRabin(mpz_t n) {
 }
 
 void primeKeyGeneration(mpz_t p) {
-    printf("Entering in prime generation function...\n");
     gmp_randstate_t state;
     gmp_randinit_default(state);
     gmp_randseed_ui(state,time(NULL));
@@ -109,5 +108,4 @@ void primeKeyGeneration(mpz_t p) {
         */
         isPrime = millerRabin(p);
     }
-    printf("Prime found, leaving the prime generation function...\n");
 }

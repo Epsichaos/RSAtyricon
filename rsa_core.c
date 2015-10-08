@@ -5,6 +5,9 @@
 #include <time.h>
 
 int cipherRSA() {
+    printf("         File Encryption\n");
+    printf("--------------------------------------\n");
+
     FILE* publicFile = fopen("public.rsa", "r");
     FILE* clearFile = fopen("Clair.txt", "r");
     FILE* cipheredFile = fopen("cipherFile.txt", "w");
@@ -34,8 +37,7 @@ int cipherRSA() {
     mpz_inp_str(n,publicFile,16);
 	mpz_inp_str(e,publicFile,16);
 
-    gmp_printf("We found n = %Zd \n", n);
-    gmp_printf("We found e = %Zd \n", e);
+    printf("-> (n,e) has been imported from public.rsa\n\n");
 
     do {
         caract = fgetc(clearFile);
@@ -57,10 +59,11 @@ int cipherRSA() {
             mpz_powm(c,m,e,n);
             mpz_out_str(cipheredFile, 62,c);
             fputc('\n', cipheredFile);
-            printf("END OF ENCRYPTION !\n");
         }
         i++;
     }while(caract != '\0' && caract != '\n');
+    printf("-> End of encryption. %d caracters have been encrypted in cipherFile.txt\n", i);
+    printf("--------------------------------------\n");
 
     // clear memory
     mpz_clear(n);
@@ -77,7 +80,9 @@ int cipherRSA() {
 }
 
 int decipherRSA() {
-    printf("Begin of deciphering\n");
+    printf("         File Decryption\n");
+    printf("--------------------------------------\n");
+
     FILE* privateFile = fopen("prive.rsa", "r");
     FILE* cipheredFile = fopen("cipherFile.txt", "r");
     FILE* decipheredFile = fopen("decipheredFile.txt", "w");
@@ -95,7 +100,6 @@ int decipherRSA() {
     mpz_t m;
 
     int i = 0;
-    int j = 1;
     char buffer[500];
     char caract;
 
@@ -112,11 +116,9 @@ int decipherRSA() {
 	mpz_inp_str(q,privateFile,16);
     mpz_inp_str(d,privateFile,16);
 
-    mpz_mul(n, p, q);
+    printf("-> (p,q,d) has been imported from prive.rsa\n\n");
 
-    gmp_printf("We found p = %Zd \n", p);
-    gmp_printf("We found q = %Zd \n", q);
-    gmp_printf("We found d = %Zd \n", d);
+    mpz_mul(n, p, q);
 
     do {
         caract = fgetc(cipheredFile);
@@ -125,18 +127,16 @@ int decipherRSA() {
             i++;
         }
         else {
-            printf("Decryption de %s\n", buffer);
-            printf("j = %d\n", j);
             buffer[i]='\0';
             mpz_set_str(c, buffer, 62);
             mpz_powm(m,c,d,n);
             mpz_out_str(decipheredFile, 62, m);
             i = 0;
-            j++;
         }
     } while(caract != EOF);
 
-    printf("Message deciphered !\n");
+    printf("-> End of decryption. Message has been decrypted in decipheredFile.txt\n");
+    printf("--------------------------------------\n");
 
     // clear memory
     mpz_clear(p);

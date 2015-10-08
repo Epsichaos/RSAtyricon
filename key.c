@@ -7,6 +7,9 @@
 #include "miller.h"
 
 int keyGeneration() {
+        printf("--------------------------------------\n");
+        printf("        Generation of Key\n");
+        printf("--------------------------------------\n");
 
     gmp_randstate_t state;
 	gmp_randinit_default(state);
@@ -41,10 +44,10 @@ int keyGeneration() {
         return -1;
     }
     primeKeyGeneration(p);
-    gmp_printf("p = %Zd\n",p);
-    sleep(2);
+    gmp_printf("p = %Zd\n\n",p);
+    sleep(1);
     primeKeyGeneration(q);
-    gmp_printf("q = %Zd\n",q);
+    gmp_printf("q = %Zd\n\n",q);
 
     // p & q are the 2 prime number to construct n
     // n = p * q
@@ -74,11 +77,14 @@ int keyGeneration() {
     mpz_out_str(privateFile,16,q);
     fputs("\n",privateFile);
     mpz_out_str(privateFile,16,d);
+    printf("-> (p,q,d) generated in prive.rsa\n");
 
     // write on the public file
     mpz_out_str(publicFile,16,n);
     fputs("\n",publicFile);
     mpz_out_str(publicFile,16,e);
+    printf("-> (n,e) generated in public.rsa\n");
+    printf("--------------------------------------\n");
 
     // clear the memory
     mpz_clear(p);

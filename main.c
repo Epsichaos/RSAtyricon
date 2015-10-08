@@ -19,6 +19,8 @@ int main(int argc, char* argv[]) {
     printf("|                     RSA IMPLEMENTATION                     |\n");
     printf("--------------------------------------------------------------\n");
 
+/*
+// test of function milleRabin
     int i = 2;
     int result;
     mpz_t entier;
@@ -27,21 +29,22 @@ int main(int argc, char* argv[]) {
         mpz_set_ui(entier, i);
         result = millerRabin(entier);
         if(result == 1) {
-            printf("i = %d est premier", i);
+            printf("i = %d est premier\n", i);
         }
         else {
-            printf("i = %d est non premier", i);
+            printf("i = %d est non premier\n", i);
         }
+        i++;
     }
+*/
+    keyGeneration();
+    cipherRSA();
 
-//    keyGeneration();
-//    cipherRSA();
-
-//    decipherRSA();
+    decipherRSA();
     // temps
     tend=time(NULL);
     texec=difftime(tend,tbegin);
 
-    printf("Temps d'exécution : %lf secondes ...\n", texec);
+    printf("[Execution time] %d seconds\n", (int) texec);
     return 0;
 }
