@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
     printf("|                     RSA IMPLEMENTATION                     |\n");
     printf("--------------------------------------------------------------\n");
 
-    //keyGeneration();
+    keyGeneration();
     cipherRSA();
 
     decipherRSA();
