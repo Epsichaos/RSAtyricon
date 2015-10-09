@@ -3,3 +3,4 @@ prive.rsa
 public.rsa
 cipherFile.txt
 decipheredFile.txt
+obj/*.o
