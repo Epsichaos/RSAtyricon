@@ -89,23 +89,7 @@ void primeKeyGeneration(mpz_t p) {
     int isPrime = NOT_PRIME;
     while(isPrime == NOT_PRIME) {
         mpz_set_ui(p,0);
-        mpz_urandomb(p,state,1024);/*
-        if(mpz_even_p(p)) {
-            isPrime = NOT_PRIME;
-        }
-        else if(mpz_fdiv_ui(p, 3) == 0) {
-            isPrime = NOT_PRIME;
-        }
-        else if(mpz_fdiv_ui(p, 5) == 0) {
-            isPrime = NOT_PRIME;
-        }
-        else if(mpz_fdiv_ui(p, 7) == 0) {
-            isPrime = NOT_PRIME;
-        }
-        else {
-            isPrime = millerRabin(p);
-        }
-        */
+        mpz_urandomb(p,state,1024);
         isPrime = millerRabin(p);
     }
 }
