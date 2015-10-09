@@ -1,4 +1,4 @@
-a.out
+bin/rsa.x
 prive.rsa
 public.rsa
 cipherFile.txt
