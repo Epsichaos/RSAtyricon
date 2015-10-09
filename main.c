@@ -8,9 +8,11 @@
 #include "rsa_core.h"
 
 /* COMPILE with
-gcc miller.c main.c key.c rsa_core.c oaep.c -lgmp -L/usr/lib -lssl -lcrypto
-*/
+gcc miller.c main.c key.c rsa_core.c -lgmp -L/usr/lib -lssl -lcrypto
 
+pour openssl :
+-L/usr/lib -lssl -lcrypto
+*/
 
 int main(int argc, char* argv[]) {
 
