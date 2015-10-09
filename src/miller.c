@@ -1,5 +1,4 @@
 // MILLER FUNCTIONS
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <gmp.h>
@@ -9,7 +8,6 @@
 #define K_ITERATIONS 20
 #define POSSIBLE_PRIME 1
 #define NOT_PRIME 0
-#define MAX_LENGTH 2048
 
 // return 0 if n is not prime, and 1 if it is probably prime
 int millerRabinStep(mpz_t a, mpz_t n) {

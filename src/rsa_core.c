@@ -1,4 +1,4 @@
-// KEY FUNCTIONS
+// RSA CORE FUNCTIONS
 #include <stdio.h>
 #include <stdlib.h>
 #include <gmp.h>
@@ -8,9 +8,9 @@ int cipherRSA() {
     printf("         File Encryption\n");
     printf("--------------------------------------\n");
 
-    FILE* publicFile = fopen("public.rsa", "r");
-    FILE* clearFile = fopen("Clair.txt", "r");
-    FILE* cipheredFile = fopen("cipherFile.txt", "w");
+    FILE* publicFile = fopen("out/public.rsa", "r");
+    FILE* clearFile = fopen("source/Clair.txt", "r");
+    FILE* cipheredFile = fopen("out/cipherFile.txt", "w");
     if(publicFile == NULL||clearFile == NULL||cipheredFile == NULL) {
         printf("Error while opening one of the 3 files required in cipherRSA\n");
         return -1;
@@ -83,9 +83,9 @@ int decipherRSA() {
     printf("         File Decryption\n");
     printf("--------------------------------------\n");
 
-    FILE* privateFile = fopen("prive.rsa", "r");
-    FILE* cipheredFile = fopen("cipherFile.txt", "r");
-    FILE* decipheredFile = fopen("decipheredFile.txt", "w");
+    FILE* privateFile = fopen("out/prive.rsa", "r");
+    FILE* cipheredFile = fopen("out/cipherFile.txt", "r");
+    FILE* decipheredFile = fopen("out/decipheredFile.txt", "w");
     if(privateFile == NULL||cipheredFile == NULL||decipheredFile == NULL) {
         printf("Error while opening one of the 3 files required in decipherRSA\n");
         return -1;

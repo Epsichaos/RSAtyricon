@@ -59,15 +59,10 @@ tar:
 run:
 	@./$(EXE_PATH)/$(PRODUCT)
 
-doxy:
-	@doxygen
-	@echo "Documentation Doxygen générée"
-
 help:
 	@echo "'make' : Compilation du Programme"
 	@echo "'make clean' : Nettoyage des fichiers *~ et .DS_Store"
 	@echo "'make mrproper' : 'make clean' et nettoyage du dossier obj"
 	@echo "'make tar' : Création d'un tarball compressé via gzip"
 	@echo "'make run' : Lancement du programme"
-	@echo "'make doxy : Compiler la documentation Doxygen"
 	@echo "'make help' : Voir cette aide"

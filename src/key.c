@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "miller.h"
 
+// Generate the key for this instance of RSA and store it into out/
 int keyGeneration() {
         printf("--------------------------------------\n");
         printf("        Generation of Key\n");
@@ -37,14 +38,15 @@ int keyGeneration() {
     mpz_init2(pgcdEPhi, 2048);
     mpz_init2(d, 2048);
 
-    FILE* privateFile=fopen("prive.rsa","w");
-	FILE* publicFile=fopen("public.rsa","w");
+    FILE* privateFile=fopen("out/prive.rsa","w+");
+	FILE* publicFile=fopen("out/public.rsa","w+");
     if(privateFile == NULL||publicFile == NULL) {
         printf("Error in opening private or public file ! \n");
         return -1;
     }
     primeKeyGeneration(p);
     gmp_printf("p = %Zd\n\n",p);
+    // wait for next seeding
     sleep(1);
     primeKeyGeneration(q);
     gmp_printf("q = %Zd\n\n",q);
