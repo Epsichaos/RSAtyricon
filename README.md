@@ -1,19 +1,20 @@
 RSAtyricon
 ===========
+*Evil implementation of RSA in C with gmp library*
 
-0. Organisation du code
-------------------------
+0. Code structure
+------------------
 
-Plusieurs répertoires contiennent les fichiers du TP :
+The files are in the following folders of the git repository:
 
-- bin/ contient l'exécutable généré par le Makefile
-- obj/ contient les fichiers obj générés par la Compilation
-- include/ contient les fichiers header .h
-- src/ contient les fichiers source .c
-- source/ contient les fichiers source de chiffrement (i.e. Clair.txt)
-- out/ contient les 3 fichiers de sortie du programme (prive.rsa, public.rsa, cipheredFile.txt, decipheredFile.txt)
+- bin/ where the executable file is generated
+- obj/ where there is the object files
+- include/ gathers the header files (.h)
+- src/ gathers the source files (.c)
+- source/ where there is the clear files to encrypt and decrypt
+- out/ gathers the 3 output files of the program (prive.rsa, public.rsa, cipheredFile.txt, decipheredFile.txt)
 
-Compilation : Saisir juste la commande "make", et la compilation est automatique
+Compilation: Just type `make`
 
 1. Vérification de primalité
 -----------------------------
