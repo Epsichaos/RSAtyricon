@@ -1,6 +1,7 @@
-bin/rsa.x
+bin/
 prive.rsa
 public.rsa
 cipherFile.txt
 decipheredFile.txt
 obj/*.o
+Source/
