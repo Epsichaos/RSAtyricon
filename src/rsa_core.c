@@ -61,7 +61,7 @@ int cipherRSA() {
             fputc('\n', cipheredFile);
         }
         i++;
-    }while(caract != '\0' && caract != '\n');
+    } while(caract != '\0' && caract != '\n');
     printf("-> End of encryption. %d caracters have been encrypted in cipherFile.txt\n", i);
     printf("--------------------------------------\n");
 
